@@ -5,7 +5,15 @@ export default function PasswordGenerator() {
     <Mobile>
       <Container>
         <Title>Password Generator</Title>
-        <Main></Main>
+        <Main>
+          <Top>
+            <Columns>
+              <Password>password</Password>
+              <Span>copy button</Span>
+            </Columns>
+          </Top>
+          <Bottom></Bottom>
+        </Main>
       </Container>
     </Mobile>
   );
@@ -47,4 +55,38 @@ const Main = styled.div`
   color: var(--white);
   outline: 1px solid white;
   height: inherit;
+`;
+
+const Top = styled.div`
+  background: var(--darkGrey);
+  display: flex;
+  flex: 1;
+`;
+const Bottom = styled.div`
+  background: var(--darkGrey);
+  height: 100%;
+  display: flex;
+`;
+
+const Wrapper = styled.div`
+  padding: 16px;
+`;
+
+const Columns = styled(Wrapper)`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Span = styled.span`
+  outline: 1px solid deeppink;
+`;
+
+const Password = styled(Span)`
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
 `;
