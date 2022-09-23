@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import Head from 'next/head';
+import { useCallback, useEffect, useReducer, useState } from 'react';
 
 import { calculateStrength, generatePassword, getSettingsCount } from '../api';
 import { Bottom, Boxes, Main } from '../components/Layouts';
