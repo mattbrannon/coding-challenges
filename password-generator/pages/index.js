@@ -16,9 +16,9 @@ const preferences = {
 };
 
 const initialState = {
-  uppercase: false,
+  uppercase: true,
   lowercase: false,
-  numbers: false,
+  numbers: true,
   symbols: false,
   length: 8,
   preferences,
@@ -94,22 +94,22 @@ export default function PasswordGenerator() {
             max={28}
           />
           <Boxes>
-            <Checkbox dispatch={dispatch} name={uppercase}>
+            <Checkbox state={state} dispatch={dispatch} name={uppercase}>
               Include Uppercase Letters
             </Checkbox>
-            <Checkbox dispatch={dispatch} name={lowercase}>
+            <Checkbox state={state} dispatch={dispatch} name={lowercase}>
               Include Lowercase Letters
             </Checkbox>
-            <Checkbox dispatch={dispatch} name={numbers}>
+            <Checkbox state={state} dispatch={dispatch} name={numbers}>
               Include Numbers
             </Checkbox>
-            <Checkbox dispatch={dispatch} name={symbols}>
+            <Checkbox state={state} dispatch={dispatch} name={symbols}>
               Include Symbols
             </Checkbox>
-            <Checkbox dispatch={dispatch} name={hidden}>
+            <Checkbox state={state} dispatch={dispatch} name={hidden}>
               Hide Password
             </Checkbox>
-            <Checkbox dispatch={dispatch} name={entropy}>
+            <Checkbox state={state} dispatch={dispatch} name={entropy}>
               Show Entropy
             </Checkbox>
           </Boxes>

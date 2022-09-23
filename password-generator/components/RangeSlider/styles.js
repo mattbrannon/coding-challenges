@@ -62,6 +62,7 @@ export const LengthValue = styled.div`
 const thumb = css`
   -webkit-appearance: none;
   -moz-appearance: none;
+  cursor: pointer;
 
   height: 28px;
   width: 28px;

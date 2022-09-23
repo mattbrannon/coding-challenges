@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Check } from './check';
 import { Wrapper, Box, Span } from './styles';
 
-export const Checkbox = ({ name, dispatch, children }) => {
-  const [isChecked, setIsChecked] = useState(false);
+export const Checkbox = ({ state, name, dispatch, children }) => {
+  const [isChecked, setIsChecked] = useState(state[name]);
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(
