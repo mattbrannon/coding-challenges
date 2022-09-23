@@ -49,74 +49,76 @@ const reducer = (state, action) => {
   }
 };
 
-const Mobile = styled.div`
-  padding: 64px 16px;
-  outline: 1px solid yellow;
-  min-height: 100vh;
-  outline-offset: -1px;
-  display: grid;
+export default function PasswordGenerator() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [password, setPassword] = useState(generatePassword(initialState));
+  const [meter, setMeter] = useState({});
+  const [style, setStyle] = useState({ opacity: 0 });
 
-  font-family: JetBrains Mono;
-`;
+  const updatePassword = useCallback(() => {
+    const count = getSettingsCount(state);
+    const password = generatePassword(state);
+    const strength = calculateStrength(password);
 
-const Container = styled.div`
-  outline: 1px solid yellow;
-  max-width: 540px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 64px 16px;
-  height: 100%;
-`;
+    setMeter({ ...strength, count });
+    setPassword(password);
+  }, [state]);
 
-const Title = styled.h1`
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-size: var(--medium);
-  text-align: center;
-  color: var(--grey);
-  margin: 0;
-`;
+  useEffect(() => updatePassword(), [updatePassword]);
+  useEffect(() => {
+    setStyle({ opacity: 1, transition: 'opacity 0.3s linear' });
+  }, []);
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  color: var(--white);
-  outline: 1px solid white;
-  height: inherit;
-`;
+  return (
+    <>
+      <Main style={style}>
+        <Head>
+          <title>Password Generator</title>
+          <meta name="description" content="Strong password generator" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-const Top = styled.div`
-  background: var(--darkGrey);
-  display: flex;
-  flex: 1;
-`;
-const Bottom = styled.div`
-  background: var(--darkGrey);
-  height: 100%;
-  display: flex;
-`;
+        <h1>Password Generator</h1>
 
-const Wrapper = styled.div`
-  padding: 16px;
-`;
+        <GeneratedPassword
+          count={meter.count}
+          state={state}
+          password={password}
+        />
 
-const Columns = styled(Wrapper)`
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  align-items: center;
-`;
+        <Bottom>
+          <RangeSlider
+            state={state}
+            dispatch={dispatch}
+            name={length}
+            max={28}
+          />
+          <Boxes>
+            <Checkbox dispatch={dispatch} name={uppercase}>
+              Include Uppercase Letters
+            </Checkbox>
+            <Checkbox dispatch={dispatch} name={lowercase}>
+              Include Lowercase Letters
+            </Checkbox>
+            <Checkbox dispatch={dispatch} name={numbers}>
+              Include Numbers
+            </Checkbox>
+            <Checkbox dispatch={dispatch} name={symbols}>
+              Include Symbols
+            </Checkbox>
+            <Checkbox dispatch={dispatch} name={hidden}>
+              Hide Password
+            </Checkbox>
+            <Checkbox dispatch={dispatch} name={entropy}>
+              Show Entropy
+            </Checkbox>
+          </Boxes>
 
-const Span = styled.span`
-  outline: 1px solid deeppink;
-`;
+          <Meter meter={meter} state={state} />
 
-const Password = styled(Span)`
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
-`;
+          <Button onClick={updatePassword}>Generate</Button>
+        </Bottom>
+      </Main>
+    </>
+  );
+}
