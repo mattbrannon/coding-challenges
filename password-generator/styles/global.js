@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: JetBrains Mono;
     src: url(/fonts/JetBrainsMono-Bold.ttf);
+    font-display: swap;
   }
 
   :root {
