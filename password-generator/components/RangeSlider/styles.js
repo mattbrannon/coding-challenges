@@ -47,7 +47,7 @@ export const Top = styled.div`
   align-items: center;
 `;
 
-export const ValueLabel = styled.span`
+export const ValueLabel = styled.label`
   display: flex;
   flex-wrap: wrap;
   color: var(--white);

@@ -13,10 +13,11 @@ export const RangeSlider = ({ state: { length }, ...props }) => {
   return (
     <Wrapper>
       <Top>
-        <ValueLabel>Character Length</ValueLabel>
+        <ValueLabel htmlFor="char-length">Character Length</ValueLabel>
         <LengthValue>{value}</LengthValue>
       </Top>
       <Input
+        id="char-length"
         onChange={onChange}
         value={value}
         stepValue={stepValue}
