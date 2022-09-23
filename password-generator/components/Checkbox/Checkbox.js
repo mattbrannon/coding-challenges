@@ -19,6 +19,9 @@ export const Checkbox = ({ name, dispatch, children }) => {
       name={name}
     >
       <Box
+        role="checkbox"
+        aria-labelledby={name}
+        aria-checked={isChecked}
         onKeyDown={(e) => e.code === 'Space' && setIsChecked(!isChecked)}
         tabIndex={0}
         isHovering={isHovering}
@@ -26,7 +29,7 @@ export const Checkbox = ({ name, dispatch, children }) => {
       >
         <Check isChecked={isChecked} />
       </Box>
-      <Span>{children}</Span>
+      <Span id={name}>{children}</Span>
     </Wrapper>
   );
 };
