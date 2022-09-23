@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check } from './check';
+import { Check } from './Check';
 import { Wrapper, Box, Span } from './styles';
 
 export const Checkbox = ({ state, name, dispatch, children }) => {
