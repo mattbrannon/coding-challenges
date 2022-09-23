@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 0 16px;
 `;
 
-export const Label = styled.div`
+export const Label = styled.label`
   font-size: var(--regular);
   color: var(--grey);
 `;
