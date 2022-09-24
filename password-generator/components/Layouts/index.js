@@ -31,7 +31,7 @@ export const Bottom = styled.div`
   gap: 32px;
   padding: 0 32px 32px;
 
-  min-height: 528px;
+  /* min-height: 528px; */
 
   @media (max-width: 420px) {
     padding: 0 16px 16px;
