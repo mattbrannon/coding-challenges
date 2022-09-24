@@ -15,9 +15,13 @@ export const Meter = ({ ...props }) => {
   );
 };
 
-const getDisplay = ({ state, meter }) => {
-  const showEntropy = state.preferences.showEntropy;
+const getDisplay = ({ state, strength }) => {
+  const showEntropy = state.showEntropy;
   const label = showEntropy ? 'Entropy' : 'Strength';
-  const value = meter.count ? (showEntropy ? meter.entropy : meter.text) : '';
+  const value = strength?.entropy
+    ? showEntropy
+      ? strength.entropy.toFixed(2)
+      : strength.label
+    : '';
   return { label, value };
 };

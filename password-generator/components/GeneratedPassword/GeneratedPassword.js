@@ -34,7 +34,7 @@ export const GeneratedPassword = ({ state, password, ...props }) => {
           readOnly={true}
           tabIndex={-1}
           ref={ref}
-          type={state.preferences.hidePassword ? 'password' : 'text'}
+          type={state.hidePassword ? 'password' : 'text'}
         />
 
         <Right>

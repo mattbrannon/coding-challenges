@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useCallback, useEffect, useReducer, useState } from 'react';
 
-import { calculateStrength, generatePassword, getSettingsCount } from '../api';
+import { generatePassword, getPasswordStrength } from '../api';
 import { Bottom, Boxes, Main } from '../components/Layouts';
 
 import Button from '../components/Button';
@@ -16,12 +16,12 @@ const preferences = {
 };
 
 const initialState = {
+  ...preferences,
   uppercase: true,
-  lowercase: false,
-  numbers: true,
+  lowercase: true,
+  numbers: false,
   symbols: false,
-  length: 8,
-  preferences,
+  length: 12,
 };
 
 const uppercase = 'uppercase';
@@ -38,13 +38,10 @@ const reducer = (state, action) => {
     case lowercase:
     case numbers:
     case symbols:
-    case length: {
-      return { ...state, [action.name]: action.value };
-    }
+    case length:
     case hidden:
     case entropy: {
-      const preferences = { ...state.preferences, [action.name]: action.value };
-      return { ...state, preferences };
+      return { ...state, [action.name]: action.value };
     }
   }
 };
@@ -52,16 +49,14 @@ const reducer = (state, action) => {
 export default function PasswordGenerator() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [password, setPassword] = useState(generatePassword(initialState));
-  const [meter, setMeter] = useState({});
+  const [strength, setStrength] = useState(getPasswordStrength(password));
   const [style, setStyle] = useState({ opacity: 0 });
 
   const updatePassword = useCallback(() => {
-    const count = getSettingsCount(state);
     const password = generatePassword(state);
-    const strength = calculateStrength(password);
-
-    setMeter({ ...strength, count });
+    const strength = getPasswordStrength(password);
     setPassword(password);
+    setStrength(strength);
   }, [state]);
 
   useEffect(() => updatePassword(), [updatePassword]);
@@ -81,7 +76,7 @@ export default function PasswordGenerator() {
         <h1>Password Generator</h1>
 
         <GeneratedPassword
-          count={meter.count}
+          strength={strength}
           state={state}
           password={password}
         />
@@ -114,7 +109,7 @@ export default function PasswordGenerator() {
             </Checkbox>
           </Boxes>
 
-          <Meter meter={meter} state={state} />
+          <Meter strength={strength} state={state} />
 
           <Button onClick={updatePassword}>Generate</Button>
         </Bottom>
