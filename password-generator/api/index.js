@@ -29,25 +29,17 @@ const getUsableChars = (state) => {
   return chars;
 };
 
-export const getCurrentSettings = (state) => {
-  return Object.fromEntries(
-    Object.entries(state).filter(
-      ([_, value]) => typeof value === 'boolean' && value
-    )
-  );
-};
-
-export const getSettingsCount = (state) => {
-  const settings = Object.keys(state).filter(
-    (key) => typeof state[key] === 'boolean' && state[key]
-  );
-  return settings.length;
-};
-
-const getSettingsUsed = (password) => {
+const getSettings = (password, state) => {
   const matches = getMatches(password);
-  return Object.keys(charMap).filter((key) => matches[key]);
+
+  const actual = Object.keys(charMap).filter((key) => matches[key]);
+  const expected = Object.keys(state).filter(
+    (key) => key in charMap && state[key]
+  );
+
+  return { actual, expected };
 };
+
 
 const getCharSpace = (password) => {
   return getSettingsUsed(password).reduce(
