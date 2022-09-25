@@ -40,7 +40,7 @@ Users should be able to:
 
 ### Links
 
-- [See the code](https://github.com/mattbrannon/frontend-mentor/tree/main/password-generator)
+- [See the code](https://github.com/mattbrannon/coding-challenges/tree/main/password-generator)
 - [Try the app](https://mattbrannon-password-generator.vercel.app/)
 
 ## My process
