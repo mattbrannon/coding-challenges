@@ -12,7 +12,7 @@ const calculateGradient = (stepValue) => {
   return gradient;
 };
 
-export const Input = styled.input.attrs(({ stepValue }) => {
+export const Range = styled.input.attrs(({ stepValue }) => {
   return {
     type: 'range',
     style: {
@@ -47,7 +47,7 @@ export const Top = styled.div`
   align-items: center;
 `;
 
-export const ValueLabel = styled.label`
+export const Label = styled.label`
   display: flex;
   flex-wrap: wrap;
   color: var(--white);
