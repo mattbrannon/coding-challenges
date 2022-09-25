@@ -11,6 +11,7 @@ This is a solution to the [Password generator app challenge on Frontend Mentor](
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
@@ -44,7 +45,7 @@ Users should be able to:
 
 ## My process
 
-This app came with a figma design that was super helpful. One of the first things I do is look at the colors and typography used in the design and create some easy to remember css variables. With those in place, I start going through the design layer by layer and mocking out a basic skeleton of the app. The goal at this point is to simply get the structure of the app laid out with semantically meaningful html elements. Once I feel happy with the overall structure, I begin working on the individual components.
+This app came with a figma design that was super helpful. One of the first things I do is look at the colors and typography used in the design and create some easy to remember css variables. With those in place, I start going through the design layer by layer and mocking out a basic skeleton of the app. The goal at this point is to simply get the structure of the app laid out. Once I feel happy with the overall structure, I begin working on the individual components.
 
 When building out components, I usually create a dedicated `components` folder with sub folders for each component. I've found that doing it this way allows me to separate various parts of a component into another file if needed while still having everything grouped together in one shared folder.
 
@@ -64,13 +65,19 @@ I spent a good amount of time researching cryptography and hashing.
 - Which is more important complexity or length?
 - How is the strength of a password determined?
 
-While I'm by no means an expert one of the main things I learned - it's all about **entropy**.
+While I'm by no means an expert, one of the main things I learned - it's all about **entropy**.
 
 **What is entropy?**
 
 The short answer is, in the context of crytography, _entropy is the measure of uncertainty of randomness_. A password with a high entropy is said to be more secure than one with low entropy. That is assuming we're talking about random character passwords and not human created ones. When humans create passwords, it becomes a lot more complicated.
 
 Entropy itself is rooted in thermodynamics. I can't pretend to understand most of it. I'll leave a link below so you can read about yourself.
+
+### Continued development
+
+One of the challenges I face with this project was in trying to identify the source of an annoying little bug. After the page loaded, if I unchecked every checkbox it would cause a split second layout shift where everything seems to collpase and then pop back into place. But then sometimes I'd reload the page, uncheck every box and that **wouldn't** happen. And then maybe 2 or 3 reloads later and it would happen again. After banging my head against the wall for a while I tried swapping out the global styles created with `styled-components` and replacing it with a regular css stylesheet and... problem solved. 
+
+While I'm happy that the issue is resolved, it's still unclear to me why it was an issue in the first place. Maybe it's just an issue with global styles created with javascript. Maybe it's a combination of different things. But I'd like to better understand why it was happening so that future me can hopefully avoid it happening again. Or at least be able to better identify the problem if it does.
 
 ### Useful resources
 
