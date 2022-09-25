@@ -39,6 +39,8 @@ export const Right = styled.div`
   gap: 16px;
   position: absolute;
   right: 0;
+  min-height: 24px;
+  height: 24px;
 `;
 
 // export const Top = styled.section`
@@ -54,9 +56,9 @@ export const Right = styled.div`
 // `;
 
 export const Button = styled.button`
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
   background: none;
   border: none;
-
+  min-height: 24px;
   display: block;
 `;

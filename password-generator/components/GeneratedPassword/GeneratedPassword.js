@@ -23,7 +23,9 @@ export const GeneratedPassword = ({ state, password, ...props }) => {
   };
 
   const onClick = () => {
-    copyText(ref.current.value).then(() => showCopiedText());
+    if (props.strength) {
+      copyText(ref.current.value).then(() => showCopiedText());
+    }
   };
 
   return (
