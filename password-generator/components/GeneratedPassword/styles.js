@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  /* min-height: 24px;
+  height: 24px; */
 `;
 
 export const Password = styled.input`
@@ -44,18 +46,6 @@ export const Right = styled.div`
   min-height: 24px;
   height: 24px;
 `;
-
-// export const Top = styled.section`
-//   display: flex;
-//   flex-direction: column;
-
-//   padding: var(--regular) var(--large);
-//   background: var(--darkGrey);
-
-//   @media (max-width: 420px) {
-//     padding: var(--regular);
-//   }
-// `;
 
 export const Button = styled.button`
   cursor: pointer;
