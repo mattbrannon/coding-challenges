@@ -16,7 +16,6 @@ export const Checkbox = ({ state, name, dispatch, children }) => {
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
       onClick={() => setIsChecked(!isChecked)}
-      name={name}
     >
       <Box
         role="checkbox"
