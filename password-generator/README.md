@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Screenshot
 
-![primary features](../images/resize3.png) ![additional features](../images/resize4.png)
+![primary features](../images/password1.png) ![additional features](../images/password2.png)
 
 ### Links
 
@@ -83,6 +83,6 @@ Entropy itself is rooted in thermodynamics. I can't pretend to understand most o
 
 ## Author
 
-- Website - [Matt Brannon](https://www.mattbrannon.dev)
+- Website - [Matt Brannon](https://www.mattbrannon.dev) - My personal site
 - Frontend Mentor - [@ghostrib](https://www.frontendmentor.io/profile/ghostrib)
 - Twitter - [@\_mattbrannon](https://www.twitter.com/_mattbrannon)
