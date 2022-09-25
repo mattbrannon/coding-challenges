@@ -77,7 +77,10 @@ Entropy itself is rooted in thermodynamics. I can't pretend to understand most o
 
 One of the challenges I face with this project was in trying to identify the source of an annoying little bug. After the page loaded, if I unchecked every checkbox it would cause a split second layout shift where everything seems to collpase and then pop back into place. But then sometimes I'd reload the page, uncheck every box and that **wouldn't** happen. And then maybe 2 or 3 reloads later and it would happen again. After banging my head against the wall for a while I tried swapping out the global styles created with `styled-components` and replacing it with a regular css stylesheet and... problem solved. 
 
-While I'm happy that the issue is resolved, it's still unclear to me why it was an issue in the first place. Maybe it's just an issue with global styles created with javascript. Maybe it's a combination of different things. But I'd like to better understand why it was happening so that future me can hopefully avoid it happening again. Or at least be able to better identify the problem if it does.
+~~While I'm happy that the issue is resolved, it's still unclear to me why it was an issue in the first place. Maybe it's just an issue with global styles created with javascript. Maybe it's a combination of different things.~~ But I'd like to better understand why it was happening so that future me can hopefully avoid it happening again. Or at least be able to better identify the problem if it does.
+
+Edit - the problem is discussed [in this issue](https://github.com/styled-components/styled-components/issues/2227)
+
 
 ### Useful resources
 
