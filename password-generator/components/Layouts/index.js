@@ -12,17 +12,6 @@ export const Main = styled.main`
   min-height: 100vh;
 `;
 
-// export const Top = styled.div`
-//   background: var(--darkGrey);
-//   display: flex;
-
-//   flex-direction: column;
-//   padding: 19px 32px;
-//   @media (max-width: 420px) {
-//     padding: 16px;
-//   }
-// `;
-
 export const Top = styled.section`
   display: flex;
   flex-direction: column;
