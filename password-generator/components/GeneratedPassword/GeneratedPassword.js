@@ -4,7 +4,6 @@ import { Wrapper, Password, Right, Text } from './styles';
 // import { Top } from '../Layouts';
 
 export const GeneratedPassword = ({ state, password, ...props }) => {
-  const placeholder = 'P4$5w0rD!';
   const [isClicked, setIsClicked] = useState(false);
   const ref = useRef();
 
@@ -32,7 +31,7 @@ export const GeneratedPassword = ({ state, password, ...props }) => {
     <>
       <Wrapper>
         <Password
-          placeholder={placeholder}
+          placeholder="P4$5w0rD!"
           value={password}
           readOnly={true}
           tabIndex={-1}
