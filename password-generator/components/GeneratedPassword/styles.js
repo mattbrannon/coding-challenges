@@ -8,16 +8,18 @@ export const Wrapper = styled.div`
 `;
 
 export const Password = styled.input`
+  display: block;
   margin: 0;
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: var(--medium);
-
   padding: 0;
   outline: none;
-  display: block;
+  background: none;
+  border: none;
+
   width: calc(100% - 28px);
+
+  color: var(--white);
+  font-size: var(--medium);
+  font-family: JetBrains Mono;
 
   @media (max-width: 420px) {
     font-size: var(--regular);
