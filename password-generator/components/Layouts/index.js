@@ -12,18 +12,30 @@ export const Main = styled.main`
   min-height: 100vh;
 `;
 
-export const Top = styled.div`
-  background: var(--darkGrey);
-  display: flex;
+// export const Top = styled.div`
+//   background: var(--darkGrey);
+//   display: flex;
 
+//   flex-direction: column;
+//   padding: 19px 32px;
+//   @media (max-width: 420px) {
+//     padding: 16px;
+//   }
+// `;
+
+export const Top = styled.section`
+  display: flex;
   flex-direction: column;
-  padding: 19px 32px;
+
+  padding: var(--regular) var(--large);
+  background: var(--darkGrey);
+
   @media (max-width: 420px) {
-    padding: 16px;
+    padding: var(--regular);
   }
 `;
 
-export const Bottom = styled.div`
+export const Bottom = styled.section`
   background: var(--darkGrey);
 
   display: flex;
@@ -31,7 +43,7 @@ export const Bottom = styled.div`
   gap: 32px;
   padding: 0 32px 32px;
 
-  /* min-height: 528px; */
+  min-height: 528px;
 
   @media (max-width: 420px) {
     padding: 0 16px 16px;
@@ -39,8 +51,11 @@ export const Bottom = styled.div`
   }
 `;
 
-export const Boxes = styled.div`
+export const Boxes = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 `;

@@ -1,6 +1,6 @@
 # Password Generator
 
-This is a solution to the [Password generator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/password-generator-app-Mr8CLycqjh). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+This is a solution to the [Password generator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/password-generator-app-Mr8CLycqjh).
 
 ## Table of contents
 
@@ -14,7 +14,6 @@ This is a solution to the [Password generator app challenge on Frontend Mentor](
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -28,85 +27,88 @@ Users should be able to:
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
 
+### Additional Features
+
+- Hide or show the password on the screen
+- Toggle between displaying the standard strength rating or the bits of entropy for the given password
+
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![screen shot](../images/screenshot3.png)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Try it live](https://mattbrannon-password-generator.vercel.app/)
 
 ## My process
 
+This app came with a figma design that was super helpful. One of the first things I do is look at the colors and typography used in the design and create some easy to remember css variables. With those in place, I start going through the design layer by layer and mocking out a basic skeleton of the app. The goal at this point is to simply get the structure of the app laid out with semantically meaningful html elements. Once I feel happy with the overall structure, I begin working on the individual components.
+
+When building out components, I usually create a dedicated `components` folder with sub folders for each component. I've found that doing it this way allows me to separate various parts of a component into another file if needed while still having everything grouped together in one shared folder. For example, in this project, the `Meter` component is structured like this:
+
+```bash
+- components
+  - Meter
+    - index.js
+    - styles.js
+    - Blocks.js
+    - Meter.js
+  - RangeSlider
+  ...
+```
+
+I tend to make a separate file for
+
+I usually put everything in one file to start with.
+
+As that file grows larger, it's usually pretty obvious what needs to be seperated into another file.
+
+And when it's not so obvious, that's usually a pretty good indication that I need to take a step back for a minute and think a bit more about what I'm actually trying to accomplish.
+
+I tend to separate components based on their role.
+
+If a component is used for styling or layout without much if any logic handling, they usually go into a separate file eventually.
+
+Not a hard and fast rule by any means as there many situations where it's not so simple making that distinction.
+
+I've just found that this works well for me.
+
+As each component is built and added to the application, I try to spot any bugs in that component and fix them before moving on. It's much easier for me to fix a bug when my brain is focused on that individual part of the app. If I simply make a note to fix it later, it's probably going to take longer and be more frustrating overall.
+
+After all the pieces have come together and everything seems to work as it should, I start trying to break it. I check for accessibility issues by tabbing through the page with a screen reader. The screen reader is helpful in finding any elements with missing lablels or aria states. Click everything, drag everything, resize the viewport, zoom out, zoom in... anything I can do that another person might do. Once I feel it's not easily broken, I run it through `lighthouse` on chrome and fix anything reported back to me.
+
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- [Next.js](https://nextjs.org/)
+- [Styled Components](https://styled-components.com/)
 
 ### What I learned
 
-To see how you can add code snippets, see below:
+After starting this project, I spent a good amount of time researching cryptography and hashing. What makes a good password, what makes a bad password, complexity vs length, etc.. While I'm by no means an expert one of the main things I learned - it's all about **entropy**.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+What is entropy? The short answer is, in the context of crytography, _entropy is the measure of uncertainty of randomness_. A password with a high entropy is said to be more secure than one with low entropy. That is assuming we're talking about random character passwords and not human created ones. When humans create passwords, it becomes a lot more complicated.
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+Entropy itself is rooted in thermodynamics. I can't pretend to understand most of it. I'll leave a link below so you can read about yourself.
 
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉');
-};
-```
+Luckily during my research I found a couple articles on _calulating_ entropy. To determine the entropy (in bits) of a string of characters, you first need to determine the amount of possible characters. For example if a password contains only numbers, then the amount of possible characters is 10. If it contains lowercase letters then add 26. Uppercase - add another 26. Symbols - varies per implementation but let's say 33.
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+33 + 26 + 26 + 10
 
 ### Continued development
 
 Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [Etropy](https://en.wikipedia.org/wiki/Entropy)
+  - [Computing](<https://en.wikipedia.org/wiki/Entropy_(computing)>)
+  - [Information Theory](<https://en.wikipedia.org/wiki/Entropy_(information_theory)>)
+- [Auth0 Blog](https://auth0.com/blog/defending-against-password-cracking-understanding-the-math/) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Professor of cryptography](https://billatnapier.medium.com/the-wonderful-world-of-hashing-some-biba-entropy-calculations-and-virtually-every-hashing-7aa6ce293109) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
 
 ## Author
 
 - Website - [Matt Brannon](https://www.mattbrannon.dev)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor - [@ghostrib](https://www.frontendmentor.io/profile/ghostrib)
+- Twitter - [@\_mattbrannon](https://www.twitter.com/_mattbrannon)

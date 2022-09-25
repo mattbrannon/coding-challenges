@@ -12,16 +12,15 @@ export const RangeSlider = ({ state: { length }, ...props }) => {
 
   return (
     <Wrapper>
-      <Top>
+      <Top aria-live="polite" aria-atomic="true">
         <ValueLabel htmlFor="char-length">Character Length</ValueLabel>
-        <LengthValue>{value}</LengthValue>
+        <LengthValue id="char-length">{value}</LengthValue>
       </Top>
       <Input
-        id="char-length"
         onChange={onChange}
-        value={value}
         stepValue={stepValue}
         {...props}
+        aria-hidden="true"
       />
     </Wrapper>
   );

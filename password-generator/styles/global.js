@@ -13,7 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     --yellow: #f8cd65;
     --green: #a4ffaf;
     --white: #e6e5ea;
-    --grey: #817d92;
+    /* --grey: #817d92; */
+    --grey: hsl(251deg, 9%, 55%);
     --darkGrey: #24232c;
     --veryDarkGrey: #18171f;
     --size32: ${32 / 16}rem;

@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { CopyIcon } from './Icon';
-import { Top, Wrapper, Password, Right, Text } from './styles';
+import { Wrapper, Password, Right, Text } from './styles';
+// import { Top } from '../Layouts';
 
 export const GeneratedPassword = ({ state, password, ...props }) => {
   const placeholder = 'P4$5w0rD!';
@@ -26,7 +27,7 @@ export const GeneratedPassword = ({ state, password, ...props }) => {
   };
 
   return (
-    <Top>
+    <>
       <Wrapper>
         <Password
           placeholder={placeholder}
@@ -45,6 +46,6 @@ export const GeneratedPassword = ({ state, password, ...props }) => {
           )}
         </Right>
       </Wrapper>
-    </Top>
+    </>
   );
 };

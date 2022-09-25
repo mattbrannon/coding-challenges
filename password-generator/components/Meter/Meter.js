@@ -1,17 +1,18 @@
-import { Container, Label, Strength, Right } from './styles';
+import { Section, Label, Strength, Right } from './styles';
 import { Blocks } from './Blocks';
+// import styled from 'styled-components';
 
 export const Meter = ({ ...props }) => {
   const { label, value } = getDisplay(props);
 
   return (
-    <Container>
+    <Section aria-live="polite" aria-atomic="true">
       <Label>{label}</Label>
       <Right>
         <Strength>{value}</Strength>
         <Blocks {...props} />
       </Right>
-    </Container>
+    </Section>
   );
 };
 
@@ -23,5 +24,6 @@ const getDisplay = ({ state, strength }) => {
       ? strength.entropy.toFixed(2)
       : strength.label
     : '';
-  return { label, value };
+  const entropy = strength?.entropy?.toFixed(2) ?? 0;
+  return { label, value, entropy };
 };

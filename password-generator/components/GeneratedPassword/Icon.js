@@ -6,7 +6,7 @@ export const CopyIcon = ({ strength, ...props }) => {
   const isDisabled = !strength;
 
   return (
-    <Button aria-label="copy password" disabled={isDisabled} {...props}>
+    <Button title="copy password" disabled={isDisabled} {...props}>
       <svg
         onMouseOver={() => setFill('#E6E5EA')}
         onMouseLeave={() => setFill('#A4FFAF')}

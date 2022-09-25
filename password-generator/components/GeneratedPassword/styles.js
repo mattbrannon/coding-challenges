@@ -17,7 +17,6 @@ export const Password = styled.input`
   padding: 0;
   outline: none;
   display: block;
-  /* overflow: hidden; */
   width: calc(100% - 28px);
 
   @media (max-width: 420px) {
@@ -42,17 +41,17 @@ export const Right = styled.div`
   right: 0;
 `;
 
-export const Top = styled.div`
-  display: flex;
-  flex-direction: column;
+// export const Top = styled.section`
+//   display: flex;
+//   flex-direction: column;
 
-  padding: var(--regular) var(--large);
-  background: var(--darkGrey);
+//   padding: var(--regular) var(--large);
+//   background: var(--darkGrey);
 
-  @media (max-width: 420px) {
-    padding: var(--regular);
-  }
-`;
+//   @media (max-width: 420px) {
+//     padding: var(--regular);
+//   }
+// `;
 
 export const Button = styled.button`
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};

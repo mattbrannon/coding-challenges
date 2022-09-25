@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useCallback, useEffect, useReducer, useState } from 'react';
 
 import { generatePassword, getPasswordStrength } from '../api';
-import { Bottom, Boxes, Main } from '../components/Layouts';
+import { Bottom, Boxes, Main, Top } from '../components/Layouts';
 
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
@@ -19,8 +19,8 @@ const initialState = {
   ...preferences,
   uppercase: true,
   lowercase: true,
-  numbers: false,
-  symbols: false,
+  numbers: true,
+  symbols: true,
   length: 12,
 };
 
@@ -75,44 +75,52 @@ export default function PasswordGenerator() {
 
         <h1>Password Generator</h1>
 
-        <GeneratedPassword
-          strength={strength}
-          state={state}
-          password={password}
-        />
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          style={{ display: 'grid', gap: '16px' }}
+          action=""
+        >
+          <Top>
+            <GeneratedPassword
+              strength={strength}
+              state={state}
+              password={password}
+            />
+          </Top>
 
-        <Bottom>
-          <RangeSlider
-            state={state}
-            dispatch={dispatch}
-            name={length}
-            max={28}
-          />
-          <Boxes>
-            <Checkbox state={state} dispatch={dispatch} name={uppercase}>
-              Include Uppercase Letters
-            </Checkbox>
-            <Checkbox state={state} dispatch={dispatch} name={lowercase}>
-              Include Lowercase Letters
-            </Checkbox>
-            <Checkbox state={state} dispatch={dispatch} name={numbers}>
-              Include Numbers
-            </Checkbox>
-            <Checkbox state={state} dispatch={dispatch} name={symbols}>
-              Include Symbols
-            </Checkbox>
-            <Checkbox state={state} dispatch={dispatch} name={hidden}>
-              Hide Password
-            </Checkbox>
-            <Checkbox state={state} dispatch={dispatch} name={entropy}>
-              Show Entropy
-            </Checkbox>
-          </Boxes>
+          <Bottom>
+            <RangeSlider
+              state={state}
+              dispatch={dispatch}
+              name={length}
+              max={28}
+            />
+            <Boxes>
+              <Checkbox state={state} dispatch={dispatch} name={uppercase}>
+                Include Uppercase Letters
+              </Checkbox>
+              <Checkbox state={state} dispatch={dispatch} name={lowercase}>
+                Include Lowercase Letters
+              </Checkbox>
+              <Checkbox state={state} dispatch={dispatch} name={numbers}>
+                Include Numbers
+              </Checkbox>
+              <Checkbox state={state} dispatch={dispatch} name={symbols}>
+                Include Symbols
+              </Checkbox>
+              <Checkbox state={state} dispatch={dispatch} name={hidden}>
+                Hide Password
+              </Checkbox>
+              <Checkbox state={state} dispatch={dispatch} name={entropy}>
+                Show Entropy
+              </Checkbox>
+            </Boxes>
 
-          <Meter strength={strength} state={state} />
+            <Meter strength={strength} state={state} />
 
-          <Button onClick={updatePassword}>Generate</Button>
-        </Bottom>
+            <Button onClick={updatePassword}>Generate</Button>
+          </Bottom>
+        </form>
       </Main>
     </>
   );
