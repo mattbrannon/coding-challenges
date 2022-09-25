@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Wrapper, Top, Input, ValueLabel, LengthValue } from './styles';
+import { Wrapper, Top, Range, Label, LengthValue } from './styles';
 
 export const RangeSlider = ({ state: { length }, ...props }) => {
   const [value, setValue] = useState(length);
@@ -12,15 +12,16 @@ export const RangeSlider = ({ state: { length }, ...props }) => {
 
   return (
     <Wrapper>
-      <Top aria-live="polite" aria-atomic="true">
-        <ValueLabel htmlFor="char-length">Character Length</ValueLabel>
-        <LengthValue id="char-length">{value}</LengthValue>
+      <Top>
+        <Label htmlFor="range">Character Length</Label>
+        <LengthValue>{value}</LengthValue>
       </Top>
-      <Input
+      <Range
+        id="range"
         onChange={onChange}
+        value={value}
         stepValue={stepValue}
         {...props}
-        aria-hidden="true"
       />
     </Wrapper>
   );
