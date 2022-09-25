@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useCallback, useEffect, useReducer, useState } from 'react';
 
-import { calculateStrength, generatePassword, getSettingsCount } from '../api';
-import { Bottom, Boxes, Main } from '../components/Layouts';
+import { generatePassword, getPasswordStrength } from '../api';
+import { Bottom, Boxes, Main, Top } from '../components/Layouts';
 
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
@@ -16,12 +16,12 @@ const preferences = {
 };
 
 const initialState = {
+  ...preferences,
   uppercase: true,
-  lowercase: false,
+  lowercase: true,
   numbers: true,
-  symbols: false,
-  length: 8,
-  preferences,
+  symbols: true,
+  length: 12,
 };
 
 const uppercase = 'uppercase';
@@ -38,13 +38,10 @@ const reducer = (state, action) => {
     case lowercase:
     case numbers:
     case symbols:
-    case length: {
-      return { ...state, [action.name]: action.value };
-    }
+    case length:
     case hidden:
     case entropy: {
-      const preferences = { ...state.preferences, [action.name]: action.value };
-      return { ...state, preferences };
+      return { ...state, [action.name]: action.value };
     }
   }
 };
@@ -52,21 +49,20 @@ const reducer = (state, action) => {
 export default function PasswordGenerator() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [password, setPassword] = useState(generatePassword(initialState));
-  const [meter, setMeter] = useState({});
+  const [strength, setStrength] = useState(getPasswordStrength(password));
   const [style, setStyle] = useState({ opacity: 0 });
 
   const updatePassword = useCallback(() => {
-    const count = getSettingsCount(state);
     const password = generatePassword(state);
-    const strength = calculateStrength(password);
-
-    setMeter({ ...strength, count });
+    const strength = getPasswordStrength(password);
     setPassword(password);
+    setStrength(strength);
   }, [state]);
 
   useEffect(() => updatePassword(), [updatePassword]);
+
   useEffect(() => {
-    setStyle({ opacity: 1, transition: 'opacity 0.3s linear' });
+    setStyle({ opacity: 1, transition: 'opacity 0.2s linear' });
   }, []);
 
   return (
@@ -80,11 +76,13 @@ export default function PasswordGenerator() {
 
         <h1>Password Generator</h1>
 
-        <GeneratedPassword
-          count={meter.count}
-          state={state}
-          password={password}
-        />
+        <Top>
+          <GeneratedPassword
+            strength={strength}
+            state={state}
+            password={password}
+          />
+        </Top>
 
         <Bottom>
           <RangeSlider
@@ -114,7 +112,7 @@ export default function PasswordGenerator() {
             </Checkbox>
           </Boxes>
 
-          <Meter meter={meter} state={state} />
+          <Meter strength={strength} state={state} />
 
           <Button onClick={updatePassword}>Generate</Button>
         </Bottom>

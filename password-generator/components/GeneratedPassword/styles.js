@@ -5,20 +5,23 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  /* min-height: 24px;
+  height: 24px; */
 `;
 
 export const Password = styled.input`
+  display: block;
   margin: 0;
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: var(--medium);
-
   padding: 0;
   outline: none;
-  display: block;
-  /* overflow: hidden; */
+  background: none;
+  border: none;
+
   width: calc(100% - 28px);
+
+  color: var(--white);
+  font-size: var(--medium);
+  font-family: JetBrains Mono;
 
   @media (max-width: 420px) {
     font-size: var(--regular);
@@ -40,24 +43,14 @@ export const Right = styled.div`
   gap: 16px;
   position: absolute;
   right: 0;
-`;
-
-export const Top = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: var(--regular) var(--large);
-  background: var(--darkGrey);
-
-  @media (max-width: 420px) {
-    padding: var(--regular);
-  }
+  min-height: 24px;
+  height: 24px;
 `;
 
 export const Button = styled.button`
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
   background: none;
   border: none;
-
+  min-height: 24px;
   display: block;
 `;

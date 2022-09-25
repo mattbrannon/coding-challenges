@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="/fonts/JetBrainsMono-Bold.ttf"
+            href="/JetBrainsMono-Bold.woff2"
             as="font"
             crossOrigin=""
             type="font/ttf"

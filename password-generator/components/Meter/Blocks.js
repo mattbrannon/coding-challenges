@@ -1,5 +1,4 @@
 import { Wrapper } from './styles';
-import { getCurrentSettings } from '../../api';
 
 const red = 'var(--red)';
 const orange = 'var(--orange)';
@@ -34,11 +33,10 @@ const getMeterColor = (level) => {
   }
 };
 
-const getStyle = ({ index, state, meter: { level } }) => {
-  const settings = getCurrentSettings(state);
-  const hasSettings = !!Object.keys(settings).length;
-  const hasColor = hasSettings && index <= level;
-  const meterColor = getMeterColor(level);
+const getStyle = ({ index, strength }) => {
+  const hasSettings = strength && !!Object.keys(strength).length;
+  const hasColor = hasSettings && index <= strength.level;
+  const meterColor = getMeterColor(strength?.level);
   const background = hasColor ? meterColor : transparent;
   const border = !hasColor ? '2px solid var(--white)' : 'none';
 

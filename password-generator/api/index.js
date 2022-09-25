@@ -29,74 +29,38 @@ const getUsableChars = (state) => {
   return chars;
 };
 
-export const getCurrentSettings = (state) => {
-  return Object.fromEntries(
-    Object.entries(state).filter(
-      ([_, value]) => typeof value === 'boolean' && value
-    )
-  );
-};
-
-export const getSettingsCount = (state) => {
-  const settings = Object.keys(state).filter(
-    (key) => typeof state[key] === 'boolean' && state[key]
-  );
-  return settings.length;
-};
-
-const getSettingsUsed = (password) => {
+const getSettings = (password, state) => {
   const matches = getMatches(password);
-  return Object.keys(charMap).filter((key) => matches[key]);
+
+  const actual = Object.keys(charMap).filter((key) => matches[key]);
+  const expected = Object.keys(state).filter(
+    (key) => key in charMap && state[key]
+  );
+
+  return { actual, expected };
 };
 
 const getCharSpace = (password) => {
-  return getSettingsUsed(password).reduce(
-    (acc, key) => charMap[key].length + acc,
-    0
-  );
+  const matches = getMatches(password);
+  return Object.keys(charMap)
+    .filter((key) => matches[key])
+    .reduce((acc, key) => charMap[key].length + acc, 0);
 };
 
-export const calculateEntropy = (password) => {
+const calculateEntropy = (password) => {
   const chars = getCharSpace(password);
   const n = Math.pow(chars, password.length);
   return Math.log10(n) / Math.log10(2);
 };
 
-export const getStrength = (level) => {
-  const text =
-    level === 1
-      ? 'TOO WEAK!'
-      : level === 2
-      ? 'WEAK'
-      : level === 3
-      ? 'MEDIUM'
-      : level === 4
-      ? 'STRONG'
-      : '';
-
-  return text;
+const compare = (password, state) => {
+  const { actual, expected } = getSettings(password, state);
+  const hasEnoughLength = state.length >= expected.length;
+  const isMismatched = expected.length !== actual.length;
+  return hasEnoughLength && isMismatched;
 };
 
-export const calculateStrength = (password) => {
-  const e = calculateEntropy(password);
-  const level =
-    e >= 44 && e < 52
-      ? 1
-      : e >= 52 && e < 60
-      ? 2
-      : e >= 60 && e < 72
-      ? 3
-      : e >= 72
-      ? 4
-      : 1;
-
-  const text = getStrength(level);
-  const entropy = e.toFixed(4);
-
-  return { text, entropy, level };
-};
-
-export const generatePassword = (state) => {
+const createPassword = (state) => {
   const chars = getUsableChars(state);
   let password = '';
 
@@ -104,19 +68,38 @@ export const generatePassword = (state) => {
     password += chars[random(chars.length - 1)] ?? '';
   }
 
-  password = verifyPassword(password, state);
-
   return password;
 };
 
 const verifyPassword = (password, state) => {
-  let numSettings = Object.keys(getCurrentSettings(state)).length;
-  let usedSettings = getSettingsUsed(password).length;
+  let shouldRunAgain = compare(password, state);
 
-  while (state.length >= numSettings && numSettings > usedSettings) {
-    password = generatePassword(state);
-    numSettings = Object.keys(getCurrentSettings(state)).length;
-    usedSettings = getSettingsUsed(password).length;
+  while (shouldRunAgain) {
+    password = createPassword(state);
+    shouldRunAgain = compare(password, state);
   }
   return password;
+};
+
+export const generatePassword = (state) => {
+  const password = createPassword(state);
+  return verifyPassword(password, state);
+};
+
+const labels = [
+  { level: 1, label: 'TOO WEAK!', entropy: [1, 48] },
+  { level: 2, label: 'WEAK', entropy: [48, 62] },
+  { level: 3, label: 'MEDIUM', entropy: [62, 74] },
+  { level: 4, label: 'STRONG', entropy: [74, Infinity] },
+];
+
+export const getPasswordStrength = (password) => {
+  const entropy = calculateEntropy(password);
+  return labels
+    .filter((obj) => {
+      const [low, high] = obj.entropy;
+      return entropy >= low && entropy <= high;
+    })
+    .map(({ level, label }) => ({ level, label, entropy }))
+    .find((o) => o);
 };

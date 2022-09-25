@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Section = styled.section`
   display: flex;
   flex-wrap: wrap;
 
@@ -16,7 +16,7 @@ export const Label = styled.label`
   color: var(--grey);
 `;
 
-export const Strength = styled.div`
+export const Strength = styled.output`
   font-size: var(--medium);
   color: var(--white);
   margin-right: 16px;

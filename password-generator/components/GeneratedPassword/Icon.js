@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button } from './styles';
 
-export const CopyIcon = ({ count, ...props }) => {
+export const CopyIcon = ({ strength, ...props }) => {
   const [fill, setFill] = useState('#A4FFAF');
-  const isDisabled = count === 0;
+  const isDisabled = !strength;
 
   return (
-    <Button aria-label="copy password" disabled={isDisabled} {...props}>
+    <Button title="copy password" {...props}>
       <svg
         onMouseOver={() => setFill('#E6E5EA')}
         onMouseLeave={() => setFill('#A4FFAF')}

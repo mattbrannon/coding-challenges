@@ -1,0 +1,70 @@
+@font-face {
+  font-family: JetBrains Mono;
+  src: url(/JetBrainsMono-Bold.woff2);
+  font-display: block;
+}
+
+:root {
+  --red: #f64a4a;
+  --orange: #fb7c58;
+  --yellow: #f8cd65;
+  --green: #a4ffaf;
+  --white: #e6e5ea;
+  --grey: #868297;
+  --darkGrey: #24232c;
+  --veryDarkGrey: #18171f;
+
+  --size32: 2rem;
+  --size24: 1.5rem;
+  --size20: 1.25rem;
+  --size18: 1.125rem;
+  --size16: 1rem;
+
+  --large: var(--size32);
+  --medium: var(--size24);
+  --regular: var(--size18);
+
+  --breakpoint: 420px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background: linear-gradient(180deg, #14131b 0%, #08070b 100%);
+  background-attachment: fixed;
+  height: 100%;
+}
+
+body {
+  font-family: JetBrains Mono;
+  font-weight: 700;
+  font-style: normal;
+  height: inherit;
+}
+
+h1 {
+  font-size: var(--medium);
+  color: var(--grey);
+  text-align: center;
+}
+
+button,
+input {
+  font: inherit;
+  font-family: JetBrains Mono;
+}
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  :root {
+    --large: var(--size24);
+    --medium: var(--size18);
+    --regular: var(--size16);
+  }
+}
